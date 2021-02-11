@@ -1,0 +1,25 @@
+.formWrapper {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 300px;
+}
+
+.contentWrapper {
+    display: flex;
+    justify-content: center;
+    border: 1px solid cornflowerblue;
+    width: 50%;
+    background-color: #c6dcfd;
+    border-radius: 5px;
+    padding: 30px;
+}
+
+.submitButtonWrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.failAlarm {
+    color: red
+}
