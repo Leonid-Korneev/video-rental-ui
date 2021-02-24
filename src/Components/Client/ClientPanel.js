@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react';
 import {FilmsService} from "../../api/FilmsService";
 import {LogbooksTable} from "./LogbooksTable";
 import {LogbookService} from "../../api/LogbookService";
-import {PersonalInfo} from "./PersonalInfo";
+import {PersonalInfo} from "./PersonalInfo/PersonalInfo";
 
 const {TabPane} = Tabs;
 
@@ -27,25 +27,26 @@ export const ClientPanel = ({userId}) => {
             setLogbooksList(logbooksList);
             setLogbookLoading(false);
         })();
-
     }, [updateInfoCounter, userId])
 
 
     return (
-        <Tabs defaultActiveKey="1" onChange={() => {
-        }}>
+        <Tabs defaultActiveKey="1">
             <TabPane tab="Список фильмов" key="1">
                 <FilmsTable setUpdateInfoCounter={setUpdateInfoCounter} userId={userId} filmsList={filmsList}
                             updateInfoCounter={updateInfoCounter} loading={filmslLoading}/>
             </TabPane>
+
             <TabPane tab="Моя учетная запись" key="2">
                 <PersonalInfo userId={userId}/>
             </TabPane>
+
             <TabPane tab="Мои прокаты" key="3">
                 <LogbooksTable filmsList={filmsList} updateInfoCounter={updateInfoCounter}
                                setUpdateInfoCounter={setUpdateInfoCounter} logbooksList={logbooksList}
                                loading={logbookLoading}/>
             </TabPane>
+
         </Tabs>
     )
 }

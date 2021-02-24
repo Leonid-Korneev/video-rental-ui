@@ -1,0 +1,31 @@
+.searchWrapper {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+ .visibleOnlyForPrint{
+    display: none;
+     margin-bottom: 20px;
+}
+
+@media print {
+    body {
+        padding: 40px;
+    }
+}
+
+@media print {
+    .visibleOnlyForPrint {
+        display: block;
+        font-weight: 700;
+        font-size: 140%;
+    }
+}
+
+@media print {
+    .tableWrapper {
+        text-align: center;
+    }
+}
+

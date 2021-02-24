@@ -1,0 +1,11 @@
+.loginTakenError {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -20px;
+    margin-bottom: 10px;
+    color: red;
+}
+
+.loginInputError {
+    border: red 1px solid;
+}

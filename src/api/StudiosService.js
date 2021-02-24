@@ -4,31 +4,31 @@ const instance = axios.create({
     baseURL: "http://localhost:8080/api/",
 })
 
-export const FilmsService = {
-    async getFilmsList() {
+export const StudiousService = {
+    async getStudiousList() {
         try {
-            const res = await instance.get('film');
+            const res = await instance.get('studio');
             return res.data
         } catch (e) {
             console.log('Server internal error')
         }
     },
 
-    async createFilm(requestData) {
+    async createStudio(requestData) {
         try {
-            const res = await instance.post('film', requestData);
+            const res = await instance.post('studio', requestData);
             return res.data
         } catch (e) {
             console.log('Server internal error')
         }
     },
 
-    async updateFilm(requestData) {
+    async updateStudio(requestData) {
         try {
-            const res = await instance.put('film', requestData);
+            const res = await instance.put('studio', requestData);
             return res.data
         } catch (e) {
             console.log('Server internal error')
         }
-    }
+    },
 }

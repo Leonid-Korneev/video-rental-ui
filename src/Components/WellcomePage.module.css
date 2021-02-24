@@ -1,4 +1,12 @@
 .content {
-    max-width: 900px;
+    max-width: 1140px;
     margin: 0 auto;
 }
+
+@media print {
+    .headerWrapper {
+        display: none;
+    }
+}
+
+

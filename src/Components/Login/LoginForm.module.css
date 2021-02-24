@@ -1,12 +1,13 @@
 .formWrapper {
     display: flex;
     justify-content: center;
-
     margin-top: 300px;
 }
 
 .contentWrapper {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     border: 1px solid cornflowerblue;
     width: 50%;
@@ -22,4 +23,19 @@
 
 .failAlarm {
     color: red
+}
+
+.registration {
+    font-weight: 500;
+}
+
+.registration:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}
+
+.registrationTitle {
+    font-size: 120%;
+
 }

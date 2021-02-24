@@ -1,14 +1,23 @@
-import {Button, Popconfirm, Table} from "antd";
+import {Button, notification, Popconfirm, Table} from "antd";
 import moment from 'moment';
 import {LogbookService} from "../../api/LogbookService";
 
-export const FilmsTable = ({filmsList, loading, userId, setUpdateInfoCounter, updateInfoCounter})=> {
+export const FilmsTable = ({filmsList, loading, userId, setUpdateInfoCounter, updateInfoCounter}) => {
 
-    const onConfirmRent = async (userId, filmId)=> {
+    const onConfirmRent = async (userId, filmId) => {
         const currentDate = moment().format("YYYY-MM-DD HH:00");
-        const requestData = {userId:userId, filmId:filmId, issueDate:currentDate}
-        await LogbookService.createLogbook(requestData);
-        setUpdateInfoCounter(updateInfoCounter+1);
+        const requestData = {userId: userId, filmId: filmId, issueDate: currentDate};
+        try {
+            await LogbookService.createLogbook(requestData);
+            setUpdateInfoCounter(updateInfoCounter + 1);
+        } catch (e) {
+            if (e.response.data === 'У данного пользователя уже есть этот фильм.') {
+                notification.open({
+                    message: 'Произошла ошибка при попытке арендовать фильм.',
+                    description: 'Вы уже арендуете данный фильм.',
+                });
+            }
+        }
     }
 
     const dataSource = filmsList ? [...filmsList].map((obj, i) => {
@@ -58,26 +67,25 @@ export const FilmsTable = ({filmsList, loading, userId, setUpdateInfoCounter, up
             dataIndex: '',
             key: 'index',
             render: (film) => {
-                const rentButton = <Button size="small" type="primary"  key={film.id}>{`Взять в прокат`}</Button>
+                const rentButton = <Button size="small" type="primary" key={film.id}>{`Взять в прокат`}</Button>
                 return (<>
                     <Popconfirm
                         key={film.id}
                         title="Вы действительно хотите взять этот фильм в прокат?"
-                        onConfirm={()=>{onConfirmRent(userId,film.id)}}
+                        onConfirm={() => {
+                            onConfirmRent(userId, film.id)
+                        }}
                         okText="Да"
                         cancelText="Нет"
                     >
                         {rentButton}
                     </Popconfirm>
-                    </>)
+                </>)
             }
         }
     ];
 
 
     return (
-        <div>
-            <Table loading={loading} dataSource={dataSource} columns={columns} />
-        </div>
-    )
+            <Table loading={loading} dataSource={dataSource} columns={columns}/>);
 }
